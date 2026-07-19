@@ -59,12 +59,12 @@ elif [ ! -f "$SKILL_DIR/creative.py" ]; then
     }
 fi
 
-if [ -f "$SCRIPT_DIR/skill.md" ] && [ "$SCRIPT_DIR" != "$SKILL_DIR" ]; then
-    cp "$SCRIPT_DIR/skill.md" "$SKILL_DIR/skill.md"
-elif [ ! -f "$SKILL_DIR/skill.md" ]; then
-    echo -e "${YELLOW}📥 下载 skill.md...${NC}"
-    curl -sSL -o "$SKILL_DIR/skill.md" "https://aivisn.com/api/skill/skill.md" || {
-        echo -e "${YELLOW}⚠ skill.md 下载失败，可手动从 GitHub 获取${NC}"
+if [ -f "$SCRIPT_DIR/SKILL.md" ] && [ "$SCRIPT_DIR" != "$SKILL_DIR" ]; then
+    cp "$SCRIPT_DIR/SKILL.md" "$SKILL_DIR/SKILL.md"
+elif [ ! -f "$SKILL_DIR/SKILL.md" ]; then
+    echo -e "${YELLOW}📥 下载 SKILL.md...${NC}"
+    curl -sSL -o "$SKILL_DIR/SKILL.md" "https://aivisn.com/api/skill/skill.md" || {
+        echo -e "${YELLOW}⚠ SKILL.md 下载失败，可手动从 GitHub 获取${NC}"
     }
 fi
 
@@ -161,7 +161,7 @@ echo -e "${GREEN}╚════════════════════
 echo ""
 echo "文件位置:"
 echo "  CLI 工具: $SKILL_DIR/creative.py"
-echo "  AI 上下文: $SKILL_DIR/skill.md"
+echo "  AI 上下文: $SKILL_DIR/SKILL.md"
 echo "  配置文件: $SKILL_DIR/.env"
 echo ""
 echo "快速测试:"

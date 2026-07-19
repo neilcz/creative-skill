@@ -27,7 +27,7 @@ cd creative-skill
 **手动安装：**
 ```bash
 mkdir -p ~/.claude/skills/creative
-cp creative.py skill.md ~/.claude/skills/creative/
+cp creative.py SKILL.md ~/.claude/skills/creative/
 echo 'CREATIVE_SERVER=https://aivisn.com/api' > ~/.claude/skills/creative/.env
 echo 'CREATIVE_API_KEY=sk-你的key' >> ~/.claude/skills/creative/.env
 chmod +x ~/.claude/skills/creative/creative.py
@@ -77,7 +77,7 @@ creative.py status <task_id> --wait
 
 ```
 ~/.claude/skills/creative/
-├── skill.md       # AI 上下文（Claude Code 自动加载）
+├── SKILL.md       # AI 上下文（Claude Code 自动加载）
 ├── creative.py    # CLI 工具（纯 Python stdlib，零依赖）
 └── .env           # 配置文件（API Key）
 ```
