@@ -68,7 +68,7 @@ def _load_env():
 
 _load_env()
 
-DEFAULT_SERVER = "https://aivisn.com"
+DEFAULT_SERVER = "https://aivisn.com/api"
 
 
 # ============================================================
@@ -145,6 +145,28 @@ class MCPClient:
         self._rpc("notifications/initialized", {})
         self._initialized = True
         return {"ok": True, "serverInfo": result.get("result", {}).get("serverInfo", {})}
+
+    def read_resource(self, uri: str) -> dict:
+        """读取 MCP 资源，返回结构化内容"""
+        r = self._rpc("resources/read", {"uri": uri})
+        if "error" in r:
+            init_r = self.initialize()
+            if "error" in init_r:
+                raise ClientError(f"MCP 初始化失败: {init_r['error'].get('message', init_r['error'])}")
+            r = self._rpc("resources/read", {"uri": uri})
+            if "error" in r:
+                raise ClientError(f"读取资源失败: {r['error'].get('message', r['error'])}")
+
+        result = r.get("result", {})
+        contents = result.get("contents", [])
+        if contents and isinstance(contents, list):
+            first = contents[0]
+            text = first.get("text", "")
+            try:
+                return json.loads(text)
+            except (json.JSONDecodeError, TypeError):
+                return {"text": text}
+        return result
 
     # ----- 高层 API -----
 
@@ -375,7 +397,7 @@ def cmd_status(task_id: str, wait: bool = False, raw: bool = False):
 
     last_percent = -1
     while True:
-        result = client.call_tool("task_status", {"task_id": task_id})
+        result = client.read_resource(f"task://{task_id}")
 
         if raw:
             print(json.dumps(result, ensure_ascii=False, indent=2))
@@ -467,7 +489,7 @@ def build_parser() -> argparse.ArgumentParser:
 
 配置:
   设置环境变量 CREATIVE_API_KEY，或写入 ~/.claude/skills/creative/.env:
-    CREATIVE_SERVER=https://aivisn.com
+    CREATIVE_SERVER=https://aivisn.com/api
     CREATIVE_API_KEY=sk-xxxxxxxx
         """,
     )

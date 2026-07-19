@@ -14,7 +14,7 @@
 
 **在线安装（推荐）：**
 ```bash
-curl -sSL https://aivisn.com/skill/install.sh | bash
+curl -sSL https://aivisn.com/api/skill/install.sh | bash
 ```
 
 **本地安装：**
@@ -28,7 +28,7 @@ cd creative-skill
 ```bash
 mkdir -p ~/.claude/skills/creative
 cp creative.py skill.md ~/.claude/skills/creative/
-echo 'CREATIVE_SERVER=https://aivisn.com' > ~/.claude/skills/creative/.env
+echo 'CREATIVE_SERVER=https://aivisn.com/api' > ~/.claude/skills/creative/.env
 echo 'CREATIVE_API_KEY=sk-你的key' >> ~/.claude/skills/creative/.env
 chmod +x ~/.claude/skills/creative/creative.py
 ```
@@ -91,7 +91,7 @@ A: Python 3.8+，纯标准库，零额外依赖。
 A: 目前仅 Claude Code。其他客户端（Cursor、Windsurf 等）推荐直接配置 MCP 协议接入。
 
 **Q: 金币怎么算？**
-A: 宫格视频 1800 金币/次，RunningHub 200-2000，其他 10-500。在 aivisn.com 充值。
+A: 任务开始前会有部分预扣，任务成功后结算，失败全额退款。在 aivisn.com 充值。
 
 **Q: 能用自建的 Creative Server 吗？**
 A: 可以，设置 `CREATIVE_SERVER=http://your-server:8000`。
@@ -99,7 +99,7 @@ A: 可以，设置 `CREATIVE_SERVER=http://your-server:8000`。
 ## 下载
 
 - [GitHub Releases](https://github.com/neilcz/creative-skill/releases)
-- [直接下载 ZIP](https://aivisn.com/skill/creative-skill.zip)
+- [直接下载 ZIP](https://aivisn.com/api/skill/skill.zip)
 
 ## License
 

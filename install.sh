@@ -85,7 +85,7 @@ if [ -n "$INJECTED_API_KEY" ] && [[ "$INJECTED_API_KEY" != ___* ]]; then
     # 服务端已注入真实 Key，直接写入
     cat > "$ENV_FILE" << EOF
 # Creative Skill 配置
-CREATIVE_SERVER=https://aivisn.com
+CREATIVE_SERVER=https://aivisn.com/api
 CREATIVE_API_KEY=$INJECTED_API_KEY
 EOF
     chmod 600 "$ENV_FILE"
